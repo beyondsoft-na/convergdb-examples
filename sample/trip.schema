@@ -1,0 +1,55 @@
+domain "test" {
+  schema "yellow" {
+    # definition for your source data files
+    relation "trip_source" {
+     relation_type = base
+     attributes {
+      attribute "VendorID"              { data_type = integer }
+      attribute "tpep_pickup_datetime"  { data_type = varchar(128) }
+      attribute "tpep_dropoff_datetime" { data_type = varchar(128) }
+      attribute "passenger_count"       { data_type = integer }
+      attribute "trip_distance"         { data_type = double }
+      attribute "RatecodeID"            { data_type = integer }
+      attribute "store_and_fwd_flag"    { data_type = varchar(128) }
+      attribute "PULocationID"          { data_type = integer }
+      attribute "DOLocationID"          { data_type = integer }
+      attribute "payment_type"          { data_type = integer }
+      attribute "fare_amount"           { data_type = double }
+      attribute "extra"                 { data_type = double }
+      attribute "mta_tax"               { data_type = double }
+      attribute "tip_amount"            { data_type = double }
+      attribute "tolls_amount"          { data_type = double }
+      attribute "improvement_surcharge" { data_type = double }
+      attribute "total_amount"          { data_type = double }
+      attribute "congestion_surcharge"  { data_type = varchar(128) }
+     }
+    }
+
+    # definition for your data lake table
+    relation "trip" {
+     relation_type = derived {
+       source = "trip_source"
+     }
+     attributes {
+        attribute "VendorID"              { data_type = integer }
+        attribute "tpep_pickup_datetime"  { data_type = varchar(128) }
+        attribute "tpep_dropoff_datetime" { data_type = varchar(128) }
+        attribute "passenger_count"       { data_type = integer }
+        attribute "trip_distance"         { data_type = double }
+        attribute "RatecodeID"            { data_type = integer }
+        attribute "store_and_fwd_flag"    { data_type = varchar(128) }
+        attribute "PULocationID"          { data_type = integer }
+        attribute "DOLocationID"          { data_type = integer }
+        attribute "payment_type"          { data_type = integer }
+        attribute "fare_amount"           { data_type = double }
+        attribute "extra"                 { data_type = double }
+        attribute "mta_tax"               { data_type = double }
+        attribute "tip_amount"            { data_type = double }
+        attribute "tolls_amount"          { data_type = double }
+        attribute "improvement_surcharge" { data_type = double }
+        attribute "total_amount"          { data_type = double }
+        attribute "congestion_surcharge"  { data_type = varchar(128) }
+     }
+    }
+  }
+}

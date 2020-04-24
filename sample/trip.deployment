@@ -1,0 +1,22 @@
+# your source data location
+s3_source "production" {
+  relations {
+    relation {
+      dsd = "test.yellow.trip_source"
+      storage_bucket = "nyc-tlc/trip data/yellow_tripdate_2018"
+      storage_format = "csv"
+    }
+  }
+}
+
+# your data lake table created with a glue etl job that runs at midnight"
+athena "production" {
+  etl_job_name = "trip_load"
+  etl_job_schedule = "cron(0 0 * * ? *)"
+  relations {
+    relation {
+      dsd = "test.yellow.trip"
+      storage_format = "parquet"
+    }
+  }
+}
